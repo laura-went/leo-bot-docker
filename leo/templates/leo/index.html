@@ -1,0 +1,52 @@
+<!-- chat/templates/chat/room.html -->
+<!DOCTYPE html>
+<html>
+{% load static %} {% csrf_token %}
+
+<head>
+  <meta charset="utf-8" />
+  <title>Chat Room</title>
+  <link rel="shortcut icon" type="image/x-icon" src="{% static 'favicon.ico' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+
+<!-- <img src="{% static '/favicon.ico' %}" /> -->
+
+<body>
+  <div class="facebox">
+    <font><b id="title">Talk to Leo Bot!</b><br /><br /> </font>
+    <h1 id="h-40"><img class="emoji" id="40" src ="{% static 'img/40.png' %}" /></h1>
+    <h1 id="h-41"><img class="emoji" id="41" src ="{% static 'img/41.png' %}" /></h1>
+    <h1 id="h-44"><img class="emoji" id="44" src ="{% static 'img/44.png' %}" /></h1>
+    <h1 id="h-48"><img class="emoji" id="48" src ="{% static 'img/48.png' %}" /></h1>
+    <h1 id="h-50"><img class="emoji" id="50" src ="{% static 'img/50.png' %}" /></h1>
+    <h1 id="h-53"><img class="emoji" id="53" src ="{% static 'img/53.png' %}" /></h1>
+    <h1 id="h-54"><img class="emoji" id="54" src ="{% static 'img/54.png' %}" /></h1>
+    <h1 id="h-57"><img class="emoji" id="57" src ="{% static 'img/57.png' %}" /></h1>
+    <h1 id='emo7'></h1>
+  </div>
+
+  <div class="chat" id="newchat">
+  </div>
+  <div class='chat' id="chat-log">
+    <p id='chat-title'>
+      Your emotions:</p><br />
+  </div>
+
+  <div class="certain">
+    <input class="button" id="chat-message-volume" type="button" value="START" />
+    <input class="button" id="chat-message-submit" type="image" src="{% static 'img/mic-white.png' %} " />
+    <br />
+  </div>
+
+  <!-- JavaScript libraries -->
+  <script src="https://www.google.com/jsapi "></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js "></script>
+  <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js "></script>
+  <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js " crossorigin="anonymous "></script>
+  <script src="{% static 'main.js' %} "></script>
+
+</body>
+
+
+</html>
