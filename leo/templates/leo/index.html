@@ -4,13 +4,12 @@
 {% load static %} {% csrf_token %}
 
 <head>
+  <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}" />
   <meta charset="utf-8" />
   <title>Chat Room</title>
-  <link rel="shortcut icon" type="image/x-icon" src="{% static 'favicon.ico' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 </head>
 
-<!-- <img src="{% static '/favicon.ico' %}" /> -->
 
 <body>
   <div class="facebox">

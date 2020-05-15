@@ -7,5 +7,7 @@ services:
     container_name: leo
     volumes:
       - .:/leo
+    expose:
+      - 8000
     ports:
       - "8000:8000"

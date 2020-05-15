@@ -23,3 +23,7 @@ ADD . /leo/
 # Install any needed packages specified in requirements.txt
 
 RUN pip install -r requirements.txt
+
+COPY ..
+
+CMD gunicorn mysite.wsgi:application --bind 0.0.0.0:$PORT
