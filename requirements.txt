@@ -19,3 +19,4 @@ serial==0.0.97
 sklearn==0.0
 sounddevice==0.3.13
 SpeechRecognition==3.8.1
+whitenoise==5.0.1
