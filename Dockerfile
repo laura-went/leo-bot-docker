@@ -21,5 +21,7 @@ WORKDIR /leo
 ADD . /leo/
 
 # Install any needed packages specified in requirements.txt
-
 RUN pip install -r requirements.txt
+
+EXPOSE 8000/tcp
+CMD ["gunicorn", "mysite.wsgi:application", "--bind", "0.0.0.0:8000"]
