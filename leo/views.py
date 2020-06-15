@@ -50,7 +50,7 @@ def get_blob(request):
     text = request.POST.get('text', False)
     with open('myfile.wav', mode='wb') as f:
         f.write(video_stream)
-    
+
     text2 = ''
     hellow=sr.AudioFile('myfile.wav')
     with hellow as source:
@@ -71,7 +71,7 @@ def get_text(request):
     text = request.POST.get('text', False)
     emotion = text_emotion(text)
     aggression = agg_detection(text)
-    json_stuff = json.dumps({"list": [emotion, aggression]})
+    json_stuff = json.dumps({"list": ['no voice',emotion, aggression]})
     return HttpResponse(json_stuff, content_type="application/json")
 
 def get_blob_text(request):
