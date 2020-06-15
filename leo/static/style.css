@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P|Quantico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat:wght@500&display=swap');
 html {
   height: 100%;
 }
+
+/* pink color #db516a */
+
+/* blue color #36c6ff */
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -14,7 +19,7 @@ html {
 }
 
 body::-webkit-scrollbar-track {
-  background: rgba(255, 149, 125, 0.99);
+  background: #36c6ff;
 }
 
 chat::-webkit-scrollbar-track {
@@ -22,40 +27,79 @@ chat::-webkit-scrollbar-track {
 }
 
 body {
-  font-family: "verdana";
+  font-family: "Montserrat";
   margin: auto;
-  text-align: center;
-  background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 149, 125, 1));
+  /* text-align: center; */
   background-size: 100% 100%;
   background-repeat: no;
 }
 
 .emoji {
   height: 800%;
+  display: inline-block;
 }
 
 h1 {
   margin: 0px;
   height: 30px;
+  display: inline-block;
+}
+
+.head {
+  margin: 5vw 5vw 3vw 15%;
+  vertical-align: bottom;
+  width: 20vw;
+  display: inline-block;
+}
+
+.subtext {
+  font-family: 'Quantico', sans-serif;
 }
 
 .facebox {
   margin-top: 10px;
-  height: 40%;
+  height: 30%;
+  margin-bottom: 2vw;
 }
 
 #title {
   text-shadow: 2px 2px #524978;
   margin-top: 5px;
-  font-size: 3.5vw;
+  font-size: 50px;
   font-family: 'Press Start 2P', cursive;
   color: #625694;
+}
+
+.left {
+  display: inline-block;
+  width: 65%;
+  background-color: #36c6ff;
+  float: left;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+}
+
+.empty {
+  margin-top: 10px;
+  height: 30%;
+  margin-bottom: 2vw;
+}
+
+.right {
+  display: inline-block;
+  background-color: #db516a;
+  width: 35%;
+  float: right;
+  top: 0;
+  left: 65%;
+  bottom: 0;
+  position: absolute;
 }
 
 .chat {
   font-family: 'Quantico', sans-serif;
   margin: auto;
-  width: 50%;
   height: 400px;
   border: solid 1px #EEE;
   display: flex;
@@ -65,15 +109,31 @@ h1 {
   background-color: white;
 }
 
+.firstbox {
+  background-color: #78d9ff;
+}
+
+#chat-message-volume {
+  color: #363636;
+  font-weight: bold;
+}
+
+#chat-message-volume2 {
+  color: #363636;
+  font-weight: bold;
+}
+
 #newchat {
   float: left;
-  width: 50%;
-  margin-left: 10vw;
+  width: 70%;
+  margin-left: 15%;
+  float: none;
+  box-sizing: border-box;
 }
 
 #chat-log {
   float: right;
-  width: 30%;
+  width: 80%;
   margin-right: 2vw;
   word-wrap: break-word;
   text-align: left;
@@ -123,26 +183,56 @@ h1 {
   margin-bottom: 2px;
 }
 
-#chat-message-submit {
-  height: 40px;
-  width: 25px;
-  padding: 10px 50px;
+.typefield {
+  margin: 10px 10px 10px 15%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+  vertical-align: top;
+  height: 50px;
+  width: 35%;
+}
+
+.button2 {
+  float: right;
+  width: auto;
+  margin-right: 15%;
+}
+
+.typefield:focus {
+  outline: none;
 }
 
 .button {
-  margin: 10px 10px;
-  background-color: #625694;
+  display: inline-block;
+  margin: 10px 0px 10px;
+  background-color: #db516a;
   border: none;
   color: white;
   font-weight: bold;
   cursor: pointer;
-  padding: 23px 48px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  width: 100px;
+  height: 50px;
+  vertical-align: super;
+}
+
+#chat-message-volume {
+  margin-left: 15%;
+}
+
+.extra {
+  height: 30px;
+  width: auto;
 }
 
 .button:focus {
@@ -150,7 +240,7 @@ h1 {
 }
 
 .button:hover {
-  background-color: #524978;
+  background-color: #c4475d;
 }
 
 @media only screen and (max-width: 600px) {}

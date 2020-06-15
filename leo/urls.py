@@ -7,5 +7,6 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('blob', views.get_blob, name='get_blob'),
+    path('text', views.get_text, name='get_text'),
     path('casual', views.get_sentence, name='get_sentence'),
 ]

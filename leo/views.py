@@ -14,6 +14,7 @@ import json
 import numpy as np
 from scipy.io.wavfile import read as read_wav
 import librosa
+import speech_recognition as sr
 
 engine = pyttsx3.init()
 clf = load('leo/model19.joblib')
@@ -27,6 +28,7 @@ service.set_service_url('https://gateway-lon.watsonplatform.net/tone-analyzer/ap
 context = ContextRecognition()
 context.load_corpus("corpus/")
 context.load_model()
+r = sr.Recognizer()
 
 @csrf_exempt
 def index(request):
@@ -46,14 +48,38 @@ def get_blob(request):
     data = request.POST.copy()
     video_stream = request.FILES['audio'].read()
     text = request.POST.get('text', False)
-    emotion = text_emotion(text)
     with open('myfile.wav', mode='wb') as f:
         f.write(video_stream)
+    
+    text2 = ''
+    hellow=sr.AudioFile('myfile.wav')
+    with hellow as source:
+        audio = r.record(source)
+    try:
+        text2 = r.recognize_google(audio)
+    except Exception as e:
+        text2 = e
+
+    emotion = text_emotion(text2)
     prediction = speech_emotion('myfile.wav')
-    aggression = agg_detection(text)
-    json_stuff = json.dumps({"list": [prediction, emotion, aggression]})
+    aggression = agg_detection(text2)
+    json_stuff = json.dumps({"list": [prediction, emotion, aggression,text2]})
     return HttpResponse(json_stuff, content_type="application/json")
 
+@csrf_exempt
+def get_text(request):
+    text = request.POST.get('text', False)
+    emotion = text_emotion(text)
+    aggression = agg_detection(text)
+    json_stuff = json.dumps({"list": [emotion, aggression]})
+    return HttpResponse(json_stuff, content_type="application/json")
+
+def get_blob_text(request):
+    text = request.POST.get('text', False)
+    emotion = text_emotion(text)
+    aggression = agg_detection(text)
+    json_stuff = json.dumps({"list": ["No voice", emotion, aggression]})
+    return HttpResponse(json_stuff, content_type="application/json")
 
 # heard emotion
 def extract_feature(file_name, mfcc, chroma, mel):

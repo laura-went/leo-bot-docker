@@ -172,6 +172,7 @@ var br = document.createElement("br");
 const delay = 150
 const defaultFace = "40"
 const blink = "41"
+var read_or_speak = 0;
 
 const start = Date.now()
 var messageCounter = 0;
@@ -187,7 +188,9 @@ const faceMap = {
 
 // on ready
 $(document).ready(function() {
-  $("#chat-message-submit").hide();
+  $("#chat-message-mic").hide();
+  $("#chat-message-start").hide();
+  $(".typefield").hide();
   $(".emoji").hide();
   $("#40").show();
   blinker()
@@ -197,8 +200,26 @@ $(document).ready(function() {
 
 const faces = Object.keys(faceMap);
 
+
+function read_or_listen(_callback){
+  const options = {
+    once: true
+  }
+  if(read_or_speak==0) {
+    document.querySelector('#chat-message-mic').addEventListener('click', () => {
+      listen(_callback);
+    }, options);
+  } else {
+     document.querySelector('#chat-message-start').addEventListener('click', () => {
+       read(_callback);
+     }, options);
+  }
+}
+
+
 // beginning continues part 2
 function both2(result){
+  console.log("in both2!")
   speech = result[0];
 	emotion = result[1]['list'];
 	if (!speech.includes('no')){
@@ -209,10 +230,8 @@ function both2(result){
 		speakVoice("Ok, we can chat for a bit as well. <br>Just say 'goodbye computer' " +
     "if you're done. <br>Or include the word 'question' in your sentence if you'd " +
     "still like to talk about personal stuff.\nNow tell me "+name+", what would you like to talk about?");
-    document.querySelector('#chat-message-submit').addEventListener('click', () => {
-    	listen(casual1);
-    });
-	}
+    read_or_listen(casual1);
+  }
 }
 
 // beginning continues
@@ -223,16 +242,44 @@ function both(result){
   text = "So " + name + ", would you like to chat about how to make the world better for you?"
   addLeo();
   speakVoice(text);
-  document.querySelector('#chat-message-submit').addEventListener('click', () => {
-	   listen(both2);
-   });
+  console.log(read_or_speak);
+  read_or_listen(both2);
 };
 
+let first_run = [both, both2, casual1, casual2];
+let run_counter = 0;
+function buttonListener() {
+
+  run_counter
+}
+
+function speech(){
+  $("#chat-message-volume").hide();
+  $("#chat-message-volume2").hide();
+  $("#chat-message-start").hide();
+  $("#typefield").hide();
+  $("#chat-message-mic").show();
+  speakVoice(text);
+  read_or_speak=0;
+  beginning();
+}
+
+function toText(){
+  $("#chat-message-volume").hide();
+  $("#chat-message-volume2").hide();
+  $("#chat-message-start").show();
+  $("#typefield").show();
+  $("#chat-message-mic").hide();
+  speakVoice(text);
+  read_or_speak=1;
+  beginning();
+}
 // !!!!!!!!!!!!!!!!BEGINNING!!!!!!!!!!!!!!!!!
-document.querySelector('#chat-message-volume').addEventListener('click', () => {speakVoice(text)});
-document.querySelector('#chat-message-submit').addEventListener('click', () => {
-	listen(both);
-});
+function beginning(){
+  console.log(read_or_speak)
+  read_or_listen(both);
+}
+
 
 // constant blinking of bot
 async function blinker(){
@@ -263,15 +310,7 @@ function speakVoice(text) {
   text = text.replace("<br>", "\n")
   text = text.replace(/&.*;/, "")
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
-	const synth = window.speechSynthesis
-	const utter = new SpeechSynthesisUtterance(text)
-  const voices = synth.getVoices()
-  utter.voice = voices[5]
-  synth.speak(utter)
-  var i = 0;
-  if (synth.speaking){
-    console.log('speaking')
-  }
+
   var timer = setInterval(function() {
     const index = Math.floor(( Date.now() - start )  / delay)%(text.length+1)
     faceNumber2 = resolveCharacter(text, index)
@@ -286,11 +325,21 @@ function speakVoice(text) {
       clearInterval(timer);
      }
     i++
-  },70);
+  },68);
+  const synth = window.speechSynthesis
+	const utter = new SpeechSynthesisUtterance(text)
+  const voices = synth.getVoices()
+  utter.voice = voices[5]
+  synth.speak(utter)
+  var i = 0;
+  if (synth.speaking){
+    console.log('speaking')
+  }
   $('#'+finalface).attr('src', "../../static/img/40.png");
-	$("#chat-message-volume").hide();
-	$("#chat-message-submit").show();
+
+
 };
+
 
 // compare how many positive vs negative detected emotions there are per category
 function compare(arr1){
@@ -356,18 +405,15 @@ function finalFeedback(result){
       text+= "<br>Now something more lightweight to talk about! If you don't want to, just say goodbye computer!";
       addLeo();
       speakVoice(text);
-      document.querySelector('#chat-message-submit').addEventListener('click', () => {
-        listen(casual1)
-      });
+      read_or_listen(casual1);
     }else{
       console.log('still going')
       text+=random(answers);
       addLeo();
       speakVoice(text);
       console.log()
-      document.querySelector('#chat-message-submit').addEventListener('click', () => {
-        listen(finalFeedback);
-      });
+      read_or_listen(finalFeedback);
+
     }
   }
   else{
@@ -378,9 +424,7 @@ function finalFeedback(result){
       text+= "<br>Now something more lightweight to talk about! If you don't want to, just say goodbye computer!"
       addLeo();
       speakVoice(text);
-      document.querySelector('#chat-message-submit').addEventListener('click', () => {
-        listen(casual1);
-      });
+      read_or_listen(casual1);
     }else{
       console.log('still going')
       finalFeedback();
@@ -399,7 +443,7 @@ function casual1(speech2){
     createsentence(casual2);
   }
   else{
-    $("#chat-message-submit").hide();
+    $("#chat-message-mic").hide();
     $("#chat-message-volume").hide();
     text = "It was nice talking to you, "+name+"! Hope to see you soon again. &#128522;";
     addLeo();
@@ -412,9 +456,7 @@ function casual2(result){
   chatbot_response = result;
   addLeo();
   speakVoice(chatbot_response);
-  document.querySelector('#chat-message-submit').addEventListener('click', () => {
-    listen(casual1);
-  });
+  read_or_listen(casual1);
 }
 
 // create sentence for casual chat
@@ -493,9 +535,7 @@ function bully3(result){
   response += response3;
   addLeo();
 	speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(bully4);
-	});
+  read_or_listen(bully4);
 }
 
 
@@ -524,9 +564,7 @@ function bully2(result){
   response += response3;
   addLeo();
 	speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(bully3);
-	});
+  read_or_listen(bully3);
 }
 
 
@@ -541,9 +579,7 @@ function bully1(){
 	bully.splice(index, 1);
   addLeo();
 	speakVoice(response3);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(bully2);
-	});
+  read_or_listen(bully2);
 }
 
 // victim ###########################################################
@@ -600,9 +636,7 @@ function victim3(result){
   response += response3;
   addLeo();
 	speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(victim4);
-	});
+  read_or_listen(victim4);
 }
 
 
@@ -631,9 +665,7 @@ function victim2(result){
   response += response3;
   addLeo();
 	speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(victim3);
-	});
+  read_or_listen(victim3);
 }
 
 
@@ -648,9 +680,7 @@ function victim1(){
 	victim.splice(index, 1);
   addLeo();
 	speakVoice(response3);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(victim2);
-	});
+  read_or_listen(victim2);
 }
 
 // sensitivity ###########################################################
@@ -714,9 +744,7 @@ function sensitivity3(result){
   response += response3;
   addLeo();
 	speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(sensitivity4);
-	});
+  read_or_listen(sensitivity4);
 }
 
 
@@ -745,9 +773,7 @@ function sensitivity2(result){
   response += response3;
   addLeo();
 	speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(sensitivity3);
-	});
+  read_or_listen(sensitivity3);
 }
 
 
@@ -762,9 +788,7 @@ function sensitivity1(){
 	sensitivity.splice(index, 1);
   addLeo();
 	speakVoice(response3);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(sensitivity2);
-	});
+  read_or_listen(sensitivity2);
 }
 
 // anger ###########################################################
@@ -828,9 +852,7 @@ function anger3(result){
   response += response3;
   addLeo();
 	speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(anger4);
-	});
+  read_or_listen(anger4);
 }
 
 
@@ -859,9 +881,7 @@ function anger2(result){
   response += response3;
   addLeo();
 	speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(anger3);
-	});
+  read_or_listen(anger3);
 }
 
 
@@ -876,9 +896,7 @@ function anger1(){
 	anger.splice(index, 1);
   addLeo();
 	speakVoice(response3);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(anger2);
-	});
+  read_or_listen(anger2);
 }
 
 
@@ -941,9 +959,7 @@ function wellbeing3(result){
   response += "Hey "+name+". "+response3;
   addLeo();
 	speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(wellbeing4);
-	});
+  read_or_listen(wellbeing4);
 }
 
 
@@ -972,9 +988,7 @@ function wellbeing2(result){
   response += response3;
   addLeo();
 	speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(wellbeing3);
-	});
+  read_or_listen(wellbeing3);
 }
 
 
@@ -989,9 +1003,7 @@ function wellbeing1(){
 	wellbeing.splice(index, 1);
   addLeo();
 	speakVoice(response3);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(wellbeing2);
-	});
+  read_or_listen(wellbeing2);
 }
 
 // mood ###########################################################
@@ -1054,9 +1066,7 @@ function mood3(result){
   response += response3;
   addLeo();
 	speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(mood4);
-	});
+  read_or_listen(mood4);
 }
 
 
@@ -1085,9 +1095,7 @@ function mood2(result){
   response += response3;
   addLeo();
 	speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(mood3);
-	});
+  read_or_listen(mood3);
 }
 
 
@@ -1102,9 +1110,7 @@ function mood1(){
 	mood.splice(index, 1);
   addLeo();
 	speakVoice(response3);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(mood2);
-	});
+  read_or_listen(mood2);
 }
 
 // interactions ###########################################################
@@ -1165,9 +1171,7 @@ function interactions3(result){
   response += response3;
   addLeo();
 	speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(interactions4);
-	});
+  read_or_listen(interactions4);
 }
 
 
@@ -1196,9 +1200,7 @@ function interactions2(result){
   response += response3;
   addLeo();
 	speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(interactions3);
-	});
+  read_or_listen(interactions3);
 }
 
 
@@ -1213,9 +1215,7 @@ function interactions1(){
 	interactions.splice(index, 1);
   addLeo();
 	speakVoice(response3);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(interactions2);
-	});
+  read_or_listen(interactions);
 }
 
 // selfesteem ##############################################################
@@ -1276,9 +1276,7 @@ function selfesteem3(result){
   response += response3;
   addLeo();
 	speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(selfesteem4);
-	});
+  read_or_listen(selfesteem4);
 }
 
 
@@ -1307,9 +1305,7 @@ function selfesteem2(result){
   response += response3;
   addLeo();
   speakVoice(response);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(selfesteem3);
-	});
+  read_or_listen(selfesteem3);
 }
 
 
@@ -1325,9 +1321,7 @@ function selfesteem1(){
 	selfesteem.splice(index, 1);
   addLeo();
 	speakVoice(response3);
-	document.querySelector('#chat-message-submit').addEventListener('click', () => {
-		listen(selfesteem2);
-	});
+  read_or_listen(selfesteem2);
 }
 
 // ##########################################################
@@ -1365,6 +1359,7 @@ function random(choices) {
   return choices[index];
 }
 
+
 // listen to user
 function listen(callback){
 	let speech, emotion;
@@ -1392,10 +1387,7 @@ function listen(callback){
 		let text = e.results[last][0].transcript;
     addMe(text);
 		speech = text;
-    document.getElementById(messageCounter).innerHTML = text
-    messageCounter++;
-    console.log(innerDiv)
-    document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
+
 		recognition.stop();
 		rec.stop();
 		gumStream.getAudioTracks()[0].stop();
@@ -1412,7 +1404,13 @@ function listen(callback){
 				contentType: false,
 				success: function(response) {
           console.log(response)
-					callback([speech, response]);
+          emotion = response['list'];
+          document.getElementById(messageCounter).innerHTML = emotion[3];
+          messageCounter++;
+          console.log(innerDiv)
+          document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
+
+					callback([emotion[3], response]);
 				}
 			}).done(function(data) {
 				emotion = data;
@@ -1429,3 +1427,35 @@ function listen(callback){
 		outputBot.textContent = 'Error: ' + e.error;
 	});
 };
+
+
+function read(callback){
+  var text2 = document.getElementById("typefield").value;
+
+  addMe(text2);
+  speech = text2;
+  document.getElementById(messageCounter).innerHTML = text2
+  messageCounter++;
+  console.log(innerDiv)
+  document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
+  var fd = new FormData();
+  fd.append('text', text2);
+  document.getElementById("typefield").value ="";
+  $.ajax({
+    type: 'POST',
+    url: "text",
+    data: fd,
+    processData: false,
+    contentType: false,
+    success: function(response) {
+      console.log(response)
+      console.log("YAY")
+      callback([text2, response]);
+    }
+  }).done(function(data) {
+    console.log("yay2")
+    emotion = data;
+  });
+  console.log("yay3")
+  return;
+}
