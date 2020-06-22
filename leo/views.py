@@ -7,6 +7,8 @@ from ibm_watson import ToneAnalyzerV3
 from ibm_watson.tone_analyzer_v3 import ToneInput
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from joblib import load
+from .models import User
+
 import soundfile
 import librosa
 import pyttsx3
@@ -80,6 +82,17 @@ def get_blob_text(request):
     aggression = agg_detection(text)
     json_stuff = json.dumps({"list": ["No voice", emotion, aggression]})
     return HttpResponse(json_stuff, content_type="application/json")
+
+@csrf_exempt
+def add_to_db(request):
+    name1 = request.POST.get('name', False)
+    text1 = request.POST.get('text', False)
+    user = User(name=name1, text=text1)
+    user.save()
+    json_stuff = json.dumps({name1: text1})
+    return HttpResponse(json_stuff, content_type="application/json")
+
+
 
 # heard emotion
 def extract_feature(file_name, mfcc, chroma, mel):

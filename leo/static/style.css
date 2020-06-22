@@ -107,6 +107,7 @@ h1 {
   padding: 5px;
   overflow: auto;
   background-color: white;
+  box-sizing: border-box;
 }
 
 .firstbox {
@@ -243,4 +244,56 @@ h1 {
   background-color: #c4475d;
 }
 
-@media only screen and (max-width: 600px) {}
+@media only screen and (max-width: 1000px) {
+  .head {
+    display: block;
+  }
+  .facebox {
+    display: block;
+  }
+  .emoji {
+    margin-left: 50%;
+    height: 600%;
+  }
+  .subhead {
+    display: block;
+  }
+  .chat {
+    display: block;
+  }
+  .certain {
+    display: block;
+  }
+  #subtext {
+    display: none !important;
+  }
+  /* #chat-message-volume {
+    display: none !important;
+  }
+  #chat-message-volume2 {
+    margin-left: 15%;
+  } */
+  .left {
+    display: block;
+    width: 100%;
+    position: relative;
+    top: auto;
+    bottom: inherit;
+    left: inherit;
+  }
+  .right {
+    display: block;
+    width: 100%;
+    position: relative;
+    top: auto;
+    bottom: inherit;
+    left: inherit;
+  }
+  #chat-log {
+    margin-bottom: 2vw;
+    float: unset;
+    margin-right: unset;
+    width: 70%;
+    margin-left: 15%;
+  }
+}

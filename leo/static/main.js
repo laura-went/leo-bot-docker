@@ -122,7 +122,7 @@ var bully_support = ["Try to focus on your own life and improve it in every way 
                  "Try to lift others up and you will see that life will surprise you in a positive way! &#128523;"]
 var answers=["<br>You know you can let it all out with me right?",
              "<br>You can speak your mind if you want?",
-             "<br>Do you want to say something about it?",
+             "<br>You can say something about it now...?",
              "<br>What do you think?"]
 URL = window.URL || window.webkitURL;
 
@@ -173,6 +173,9 @@ const delay = 150
 const defaultFace = "40"
 const blink = "41"
 var read_or_speak = 0;
+var save_text = 2;
+var total_text = "";
+var name;
 
 const start = Date.now()
 var messageCounter = 0;
@@ -223,13 +226,17 @@ function both2(result){
   speech = result[0];
 	emotion = result[1]['list'];
 	if (!speech.includes('no')){
-		selfesteem1();
+    text = "First tell me, how are you feeling today?";
+    save_text=1;
+    addLeo();
+    speakVoice(text);
+    read_or_listen(selfesteem1);
 	}
 	else {
     addLeo();
 		speakVoice("Ok, we can chat for a bit as well. <br>Just say 'goodbye computer' " +
     "if you're done. <br>Or include the word 'question' in your sentence if you'd " +
-    "still like to talk about personal stuff.\nNow tell me "+name+", what would you like to talk about?");
+    "still like to talk about personal stuff.<br>Now tell me "+name+", what would you like to talk about?");
     read_or_listen(casual1);
   }
 }
@@ -306,8 +313,8 @@ function speakVoice(text) {
   document.getElementById(messageCounter).innerHTML = text
   messageCounter++;
   console.log(innerDiv)
-  text = text.replace(/<br>/, "\n")
-  text = text.replace("<br>", "\n")
+  text = text.replace(/<br>/, "<br>")
+  text = text.replace("<br>", "<br>")
   text = text.replace(/&.*;/, "")
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
 
@@ -374,7 +381,7 @@ function finalFeedback(result){
   console.log(totalList[final][2],totalList[final][0], totalList[final][3])
   if (totalList[final][0].length!=0 && totalList[final][3]>=0.5){
     console.log('this category was asked')
-    text = "";
+    text = "Thanks for sharing with me &#128522;.<br>";
     response = random(totalList[final][1]);
   	var index = totalList[final][1].indexOf(response);
   	totalList[final][1].splice(index, 1);
@@ -402,10 +409,9 @@ function finalFeedback(result){
     console.log(final, totalList.length)
     if (final >= totalList.length){
       console.log('walked through whole totalList')
-      text+= "<br>Now something more lightweight to talk about! If you don't want to, just say goodbye computer!";
       addLeo();
       speakVoice(text);
-      read_or_listen(casual1);
+      finalFeedback2();
     }else{
       console.log('still going')
       text+=random(answers);
@@ -420,11 +426,7 @@ function finalFeedback(result){
     final ++;
     console.log('thing not filled ',final)
     if (final == totalList.length){
-      console.log('walked through whole totalList')
-      text+= "<br>Now something more lightweight to talk about! If you don't want to, just say goodbye computer!"
-      addLeo();
-      speakVoice(text);
-      read_or_listen(casual1);
+      finalFeedback2();
     }else{
       console.log('still going')
       finalFeedback();
@@ -432,23 +434,50 @@ function finalFeedback(result){
   }
 }
 
+function finalFeedback2(){
+  text= "Now something more lightweight to talk about! If you don't want to, just say goodbye computer. But can I ask you first, do you feel a little bit better now after our conversation?";
+  save_text=1;
+  addLeo();
+  speakVoice(text);
+  read_or_listen(casual1);
+}
 
 // casual chat part 1
 function casual1(speech2){
   bare_sentence = speech2[0];
   if (bare_sentence.includes('question')){
-    selfesteem1();
+    both2(speech2);
   }
   else if (bare_sentence != 'goodbye computer'){
     createsentence(casual2);
   }
   else{
-    $("#chat-message-mic").hide();
-    $("#chat-message-volume").hide();
-    text = "It was nice talking to you, "+name+"! Hope to see you soon again. &#128522;";
-    addLeo();
-    speakVoice(text)
+    // send name and text and exit
+    var url = "add_to_db";
+  	var fd = new FormData();
+    fd.append('name', name)
+  	fd.append('text', total_text);
+  	$.ajax({
+  		type: 'POST',
+  		url: url,
+  		data: fd,
+  		processData: false,
+  		contentType: false,
+  		success: function(response) {
+        console.log(response)
+  			exit(response);
+  		}
+  	}).done(function(data) {
+  	});
   }
+}
+
+function exit(result){
+  $("#chat-message-mic").hide();
+  $("#chat-message-volume").hide();
+  text = "It was nice talking to you, "+name+"! Hope to see you soon again. &#128522;";
+  addLeo();
+  speakVoice(text)
 }
 
 // casual chat part 2
@@ -502,7 +531,7 @@ function bully4(result){
   value=0;
   console.log('bully chat-log')
   document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append("<br />"+'bully '+ value_dict['bully'].toFixed(2) +': ' + bully_dict);
+  document.getElementById("chat-log").append("\n"+'bully '+ value_dict['bully'].toFixed(2) +':\n' + bully_dict);
   document.getElementById("chat-log").appendChild(br);
   document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
@@ -603,7 +632,7 @@ function victim4(result){
   value=0;
   console.log('victim chat-log')
   document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append("<br />"+'victim '+ value_dict['victim'].toFixed(2) +': ' + victim_dict);
+  document.getElementById("chat-log").append("\n"+'victim '+ value_dict['victim'].toFixed(2) +':\n' + victim_dict);
   document.getElementById("chat-log").appendChild(br);
   document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
@@ -704,7 +733,7 @@ function sensitivity4(result){
   value=0;
   console.log('sensitivity chat-log')
   document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append("<br />"+'sensitivity '+ value_dict['sensitivity'].toFixed(2) +': ' + sensitivity_dict);
+  document.getElementById("chat-log").append("\n"+'sensitivity '+ value_dict['sensitivity'].toFixed(2) +':\n' + sensitivity_dict);
   document.getElementById("chat-log").appendChild(br);
   document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
@@ -812,7 +841,7 @@ function anger4(result){
   value=0;
   console.log('anger chat-log')
   document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append("<br />"+'anger '+ value_dict['anger'].toFixed(2) +': ' + anger_dict);
+  document.getElementById("chat-log").append("\n"+'anger '+ value_dict['anger'].toFixed(2) +':\n' + anger_dict);
   document.getElementById("chat-log").appendChild(br);
   document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
@@ -921,7 +950,7 @@ function wellbeing4(result){
   value=0;
   console.log('wellbeing chat-log')
   document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append("<br />"+'wellbeing '+ value_dict['wellbeing'].toFixed(2) +': ' + wellbeing_dict);
+  document.getElementById("chat-log").append("\n"+'wellbeing '+ value_dict['wellbeing'].toFixed(2) +':\n' + wellbeing_dict);
   document.getElementById("chat-log").appendChild(br);
   document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
@@ -946,7 +975,7 @@ function wellbeing3(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>'+name
+    response += '<br>'
 	}
   wellbeing_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(wellbeing);
@@ -1028,7 +1057,7 @@ function mood4(result){
   value=0;
   console.log('mood chat-log')
   document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append('mood '+ value_dict['mood'].toFixed(2) +': ' + mood_dict);
+  document.getElementById("chat-log").append('mood '+ value_dict['mood'].toFixed(2) +':\n' + mood_dict);
   document.getElementById("chat-log").appendChild(br);
   document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
@@ -1134,7 +1163,7 @@ function interactions4(result){
   value=0;
   console.log('interactions chat-log')
   document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append("<br />"+'interactions '+ value_dict['interactions'].toFixed(2) +': ' + interactions_dict);
+  document.getElementById("chat-log").append("\n"+'interactions '+ value_dict['interactions'].toFixed(2) +':\n' + interactions_dict);
   document.getElementById("chat-log").appendChild(br);
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
 	if (value_dict['interactions'] >= 0.5){
@@ -1215,7 +1244,7 @@ function interactions1(){
 	interactions.splice(index, 1);
   addLeo();
 	speakVoice(response3);
-  read_or_listen(interactions);
+  read_or_listen(interactions2);
 }
 
 // selfesteem ##############################################################
@@ -1239,7 +1268,7 @@ function selfesteem4(result){
   value=0;
   console.log('selfesteem chat-log')
   document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append('selfesteem '+ value_dict['selfesteem'].toFixed(2) +': ' + selfesteem_dict);
+  document.getElementById("chat-log").append('selfesteem '+ value_dict['selfesteem'].toFixed(2) +':\n' + selfesteem_dict);
   document.getElementById("chat-log").appendChild(br);
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
 	if (value_dict['selfesteem'] >= 0.5){
@@ -1371,9 +1400,11 @@ function listen(callback){
 		input = audioContext.createMediaStreamSource(stream);
 		rec = new Recorder(input,{numChannels:1});
 		rec.record();
+    // alert("works");
 	});
 	const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-	const recognition = new SpeechRecognition();
+	const recognition = new webkitSpeechRecognition();
+  recognition.continuous = true;
 	recognition.lang = 'en-US';
 	recognition.start();
 
@@ -1409,7 +1440,14 @@ function listen(callback){
           messageCounter++;
           console.log(innerDiv)
           document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
-
+          if(save_text==1){
+            total_text+=emotion[3] + ';';
+            save_text=0;
+          } else if(save_text==2){
+            name=emotion[3];
+            total_text+=emotion[3] + ';';
+            save_text=0;
+          }
 					callback([emotion[3], response]);
 				}
 			}).done(function(data) {
@@ -1450,6 +1488,14 @@ function read(callback){
     success: function(response) {
       console.log(response)
       console.log("YAY")
+      if(save_text==1){
+        total_text+=text2 + ';';
+        save_text=0;
+      } else if(save_text==2){
+        name=text2;
+        total_text+=text2 + ';';
+        save_text=0;
+      }
       callback([text2, response]);
     }
   }).done(function(data) {

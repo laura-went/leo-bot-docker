@@ -9,4 +9,5 @@ urlpatterns = [
     path('blob', views.get_blob, name='get_blob'),
     path('text', views.get_text, name='get_text'),
     path('casual', views.get_sentence, name='get_sentence'),
+    path('add_to_db', views.add_to_db, name='add_to_db'),
 ]
