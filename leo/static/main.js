@@ -1402,18 +1402,19 @@ function listen(callback){
 		rec.record();
     // alert("works");
 	});
-	const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-	const recognition = new webkitSpeechRecognition();
-  recognition.continuous = true;
+	// const SpeechRecognition = new webkitSpeechRecognition() || new SpeechRecognition();
+	const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
 	recognition.lang = 'en-US';
 	recognition.start();
 
 	recognition.addEventListener('speechstart', () => {
+    document.getElementById("chat-message-mic").style.background='#f7f74d';
 		console.log('Speech has been detected.');
 	});
 
 	recognition.addEventListener('result', (e) => {
 		console.log('Result has been detected');
+    document.getElementById("chat-message-mic").style.background='#2ade51';
 		let last = e.results.length - 1;
 		let text = e.results[last][0].transcript;
     addMe(text);
