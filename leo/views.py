@@ -87,9 +87,10 @@ def get_blob_text(request):
 def add_to_db(request):
     name1 = request.POST.get('name', False)
     text1 = request.POST.get('text', False)
-    user = User(name=name1, text=text1)
+    emotions1 = request.POST.get('emotions', False)
+    user = User(name=name1, text=text1, emotions=emotions1)
     user.save()
-    json_stuff = json.dumps({name1: text1})
+    json_stuff = json.dumps({name1: [text1,emotions1]})
     return HttpResponse(json_stuff, content_type="application/json")
 
 

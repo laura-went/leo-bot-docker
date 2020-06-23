@@ -176,6 +176,9 @@ var read_or_speak = 0;
 var save_text = 2;
 var total_text = "";
 var name;
+var save_emotion = 2;
+var total_emotion = "";
+var emotionList;
 
 const start = Date.now()
 var messageCounter = 0;
@@ -192,6 +195,7 @@ const faceMap = {
 // on ready
 $(document).ready(function() {
   $("#chat-message-mic").hide();
+  $("#phonetext").hide();
   $("#chat-message-start").hide();
   $(".typefield").hide();
   $(".emoji").hide();
@@ -203,6 +207,11 @@ $(document).ready(function() {
 
 const faces = Object.keys(faceMap);
 
+if (!('webkitSpeechRecognition' in window)) {
+  $("#chat-message-volume").hide();
+  $("#subtext").hide();
+  $("#phonetext").show();
+}
 
 function read_or_listen(_callback){
   const options = {
@@ -453,10 +462,19 @@ function casual1(speech2){
   }
   else{
     // send name and text and exit
+    emotionList = [['self-esteem', value_dict['selfesteem'],selfesteem_dict],
+    ['well-being', value_dict['wellbeing'],wellbeing_dict],
+    ['interactions', value_dict['interactions'],interactions_dict],
+    ['mood', value_dict['mood'],mood_dict],
+    ['sensitivity', value_dict['sensitivity'],sensitivity_dict],
+    ['bullying', value_dict['bully'],bully_dict],
+    ['anger', value_dict['anger'],anger_dict],
+    ['bullied', value_dict['victim'],victim_dict]];
     var url = "add_to_db";
   	var fd = new FormData();
     fd.append('name', name)
   	fd.append('text', total_text);
+    fd.append('emotions', emotionList);
   	$.ajax({
   		type: 'POST',
   		url: url,
@@ -474,6 +492,8 @@ function casual1(speech2){
 
 function exit(result){
   $("#chat-message-mic").hide();
+  $("#chat-message-start").hide();
+  $("#typefield").hide();
   $("#chat-message-volume").hide();
   text = "It was nice talking to you, "+name+"! Hope to see you soon again. &#128522;";
   addLeo();
@@ -1407,11 +1427,11 @@ function listen(callback){
 	recognition.start();
 
 	recognition.addEventListener('speechstart', () => {
-    document.getElementById("chat-message-mic").style.background='#f7f74d';
+    document.getElementById("chat-message-mic").style.background='#c4475d';
 		console.log('Speech has been detected.');
 	});
   recognition.onresult = function(e) {
-    document.getElementById("chat-message-mic").style.background='#2ade51';
+    document.getElementById("chat-message-mic").style.background='#db516a';
 		let last = e.results.length - 1;
 		let text = e.results[last][0].transcript;
     addMe(text);

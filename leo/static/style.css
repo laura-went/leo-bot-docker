@@ -267,6 +267,11 @@ h1 {
   #subtext {
     display: none !important;
   }
+  #phonetext {
+    display: block !important;
+    visibility: visible !important;
+    width: 300%;
+  }
   /* #chat-message-volume {
     display: none !important;
   }
