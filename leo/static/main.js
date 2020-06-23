@@ -1388,8 +1388,6 @@ function random(choices) {
   return choices[index];
 }
 
-
-// listen to user
 function listen(callback){
 	let speech, emotion;
 	var constraints = { audio: true, video:false }
@@ -1405,6 +1403,131 @@ function listen(callback){
 	// const SpeechRecognition = new webkitSpeechRecognition() || new SpeechRecognition();
 	const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
 	recognition.lang = 'en-US';
+  recognition.continuous = false;
+	recognition.start();
+
+	recognition.addEventListener('speechstart', () => {
+    document.getElementById("chat-message-mic").style.background='#f7f74d';
+		console.log('Speech has been detected.');
+	});
+  recognition.onresult = function(e) {
+    document.getElementById("chat-message-mic").style.background='#2ade51';
+		let last = e.results.length - 1;
+		let text = e.results[last][0].transcript;
+    addMe(text);
+		speech = text;
+
+		recognition.stop();
+		rec.stop();
+		gumStream.getAudioTracks()[0].stop();
+		rec.exportWAV(function(blob){
+			var url = "blob";
+			var fd = new FormData();
+			fd.append('audio', blob, 'test.wav');
+			fd.append('text', speech);
+			$.ajax({
+				type: 'POST',
+				url: url,
+				data: fd,
+				processData: false,
+				contentType: false,
+				success: function(response) {
+          console.log(response)
+          emotion = response['list'];
+          document.getElementById(messageCounter).innerHTML = emotion[3];
+          messageCounter++;
+          console.log(innerDiv)
+          document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
+          if(save_text==1){
+            total_text+=emotion[3] + ';';
+            save_text=0;
+          } else if(save_text==2){
+            name=emotion[3];
+            total_text+=emotion[3] + ';';
+            save_text=0;
+          }
+					callback([emotion[3], response]);
+				}
+			}).done(function(data) {
+				emotion = data;
+			});
+		});
+		rec.clear();
+		return;
+  }
+
+	// recognition.addEventListener('result', (e) => {
+	// 	console.log('Result has been detected');
+  //   document.getElementById("chat-message-mic").style.background='#2ade51';
+	// 	let last = e.results.length - 1;
+	// 	let text = e.results[last][0].transcript;
+  //   addMe(text);
+	// 	speech = text;
+  //
+	// 	recognition.stop();
+	// 	rec.stop();
+	// 	gumStream.getAudioTracks()[0].stop();
+	// 	rec.exportWAV(function(blob){
+	// 		var url = "blob";
+	// 		var fd = new FormData();
+	// 		fd.append('audio', blob, 'test.wav');
+	// 		fd.append('text', speech);
+	// 		$.ajax({
+	// 			type: 'POST',
+	// 			url: url,
+	// 			data: fd,
+	// 			processData: false,
+	// 			contentType: false,
+	// 			success: function(response) {
+  //         console.log(response)
+  //         emotion = response['list'];
+  //         document.getElementById(messageCounter).innerHTML = emotion[3];
+  //         messageCounter++;
+  //         console.log(innerDiv)
+  //         document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
+  //         if(save_text==1){
+  //           total_text+=emotion[3] + ';';
+  //           save_text=0;
+  //         } else if(save_text==2){
+  //           name=emotion[3];
+  //           total_text+=emotion[3] + ';';
+  //           save_text=0;
+  //         }
+	// 				callback([emotion[3], response]);
+	// 			}
+	// 		}).done(function(data) {
+	// 			emotion = data;
+	// 		});
+	// 	});
+	// 	rec.clear();
+	// 	return;
+	// });
+	recognition.addEventListener('speechend', () => {
+		return;
+	});
+	return;
+	recognition.addEventListener('error', (e) => {
+		outputBot.textContent = 'Error: ' + e.error;
+	});
+};
+
+// listen to user
+function listen2(callback){
+	let speech, emotion;
+	var constraints = { audio: true, video:false }
+	navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+		console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
+		audioContext = new AudioContext();
+		gumStream = stream;
+		input = audioContext.createMediaStreamSource(stream);
+		rec = new Recorder(input,{numChannels:1});
+		rec.record();
+    // alert("works");
+	});
+	// const SpeechRecognition = new webkitSpeechRecognition() || new SpeechRecognition();
+	const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+	recognition.lang = 'en-US';
+  recognition.continuous = false;
 	recognition.start();
 
 	recognition.addEventListener('speechstart', () => {
