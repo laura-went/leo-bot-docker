@@ -120,10 +120,10 @@ var victim_support = ["It’s important to surround yourself with good energy.",
 var bully_support = ["Try to focus on your own life and improve it in every way you can.",
                  "Don’t try to project your feelings onto others, as every person lives a different life.",
                  "Try to lift others up and you will see that life will surprise you in a positive way! &#128523;"]
-var answers=["<br>You know you can let it all out with me right?",
-             "<br>You can speak your mind if you want?",
-             "<br>You can say something about it now...?",
-             "<br>What do you think?"]
+var answers=["\nYou know you can let it all out with me right?",
+             "\nYou can speak your mind if you want?",
+             "\nYou can say something about it now...?",
+             "\nWhat do you think?"]
 URL = window.URL || window.webkitURL;
 
 var gumStream;
@@ -243,9 +243,9 @@ function both2(result){
 	}
 	else {
     addLeo();
-		speakVoice("Ok, we can chat for a bit as well. <br>Just say 'goodbye computer' " +
-    "if you're done. <br>Or include the word 'question' in your sentence if you'd " +
-    "still like to talk about personal stuff.<br>Now tell me "+name+", what would you like to talk about?");
+		speakVoice("Ok, we can chat for a bit as well. \nJust say 'goodbye computer' " +
+    "if you're done. \nOr include the word 'question' in your sentence if you'd " +
+    "still like to talk about personal stuff.\nNow tell me "+name+", what would you like to talk about?");
     read_or_listen(casual1);
   }
 }
@@ -317,13 +317,13 @@ function resolveCharacter(message, index) {
 
 // speak (speech+face moving) and append text of bot
 function speakVoice(text) {
-  var texts = text.split(/<br>/);
+  var texts = text.split(/\n/);
   console.log(texts)
   document.getElementById(messageCounter).innerHTML = text
   messageCounter++;
   console.log(innerDiv)
-  text = text.replace(/<br>/, "<br>")
-  text = text.replace("<br>", "<br>")
+  text = text.replace(/\n/, "\n")
+  text = text.replace("\n", "\n")
   text = text.replace(/&.*;/, "")
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
 
@@ -390,28 +390,28 @@ function finalFeedback(result){
   console.log(totalList[final][2],totalList[final][0], totalList[final][3])
   if (totalList[final][0].length!=0 && totalList[final][3]>=0.5){
     console.log('this category was asked')
-    text = "Thanks for sharing with me &#128522;.<br>";
+    text = "Thanks for sharing with me &#128522;.\n";
     response = random(totalList[final][1]);
   	var index = totalList[final][1].indexOf(response);
   	totalList[final][1].splice(index, 1);
     if (totalList[final][2]=='bullying' || totalList[final][2]=='bullied'){
       console.log('category is bully/victim')
       if(compare(totalList[final][0])){
-        text = "If I'm not mistaken, you've been "+totalList[final][2]+" in some form? That's never OK!<br>"+
-        "Also I don't think you have any positive emotions about it.<br>"+ response
+        text = "If I'm not mistaken, you've been "+totalList[final][2]+" in some form? That's never OK!\n"+
+        "Also I don't think you have any positive emotions about it.\n"+ response
       }
       else {
-        text = "It doesn't seem to bother you that you've been "+totalList[final][2]+".<br>"+response
+        text = "It doesn't seem to bother you that you've been "+totalList[final][2]+".\n"+response
       }
     }
     else{
       console.log('category is NOT bully/victim')
       if(compare(totalList[final][0])){
-        text = "So... I've sensed some unfavourable emotions towards your "+ totalList[final][2]+", "+name+".<br>"+response
+        text = "So... I've sensed some unfavourable emotions towards your "+ totalList[final][2]+", "+name+".\n"+response
       }
       else {
         text = "You seem emotionally fine about your "+ totalList[final][2]+", even though those are topics you seem to "+
-        "struggle with.<br>"+response
+        "struggle with.\n"+response
       }
     }
     final++;
@@ -543,7 +543,7 @@ function bully4(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>';
+    response += '\n';
 	}
   bully_dict.push([voice_emotion, text_emotion, aggression]);
 
@@ -571,7 +571,7 @@ function bully3(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>';
+    response += '\n';
 	}
   bully_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(bully);
@@ -600,7 +600,7 @@ function bully2(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>';
+    response += '\n';
 	}
   bully_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(bully);
@@ -645,7 +645,7 @@ function victim4(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>';
+    response += '\n';
 	}
   victim_dict.push([voice_emotion, text_emotion, aggression]);
 	value_dict['victim'] = value/victim_value;
@@ -672,7 +672,7 @@ function victim3(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>';
+    response += '\n';
 	}
   victim_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(victim);
@@ -701,7 +701,7 @@ function victim2(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += "<br>You've got much more to you than you think "+name+".";
+    response += "\nYou've got much more to you than you think "+name+".";
 	}
   victim_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(victim);
@@ -746,7 +746,7 @@ function sensitivity4(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>';
+    response += '\n';
 	}
   sensitivity_dict.push([voice_emotion, text_emotion, aggression]);
 	value_dict['sensitivity'] = value/sensitivity_value;
@@ -780,7 +780,7 @@ function sensitivity3(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>';
+    response += '\n';
 	}
   sensitivity_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(sensitivity);
@@ -809,7 +809,7 @@ function sensitivity2(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>';
+    response += '\n';
 	}
   sensitivity_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(sensitivity);
@@ -854,7 +854,7 @@ function anger4(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>';
+    response += '\n';
 	}
   anger_dict.push([voice_emotion, text_emotion, aggression]);
 	value_dict['anger'] = value/anger_value;
@@ -888,7 +888,7 @@ function anger3(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>';
+    response += '\n';
 	}
   anger_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(anger);
@@ -917,7 +917,7 @@ function anger2(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += "<br>You're so kind "+name+".";
+    response += "\nYou're so kind "+name+".";
 	}
   anger_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(anger);
@@ -995,7 +995,7 @@ function wellbeing3(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>'
+    response += '\n'
 	}
   wellbeing_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(wellbeing);
@@ -1024,7 +1024,7 @@ function wellbeing2(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>'
+    response += '\n'
 	}
   wellbeing_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(wellbeing);
@@ -1102,7 +1102,7 @@ function mood3(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>'
+    response += '\n'
 	}
   mood_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(mood);
@@ -1131,7 +1131,7 @@ function mood2(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>'
+    response += '\n'
 	}
   mood_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(mood);
@@ -1207,7 +1207,7 @@ function interactions3(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>'
+    response += '\n'
 	}
   interactions_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(interactions);
@@ -1236,7 +1236,7 @@ function interactions2(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>Let me tell you '+name+', '
+    response += '\nLet me tell you '+name+', '
 	}
   interactions_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(interactions);
@@ -1312,7 +1312,7 @@ function selfesteem3(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>'+name+', '
+    response += '\n'+name+', '
 	}
   selfesteem_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(selfesteem);
@@ -1341,7 +1341,7 @@ function selfesteem2(result){
     response = random(supportive);
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
-    response += '<br>'
+    response += '\n'
 	}
   selfesteem_dict.push([voice_emotion, text_emotion, aggression]);
 	var response1 = random(selfesteem);
