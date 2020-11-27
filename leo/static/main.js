@@ -124,6 +124,11 @@ var answers=["\nYou know you can let it all out with me right?",
              "\nYou can speak your mind if you want?",
              "\nYou can say something about it now...?",
              "\nWhat do you think?"]
+
+
+
+
+
 URL = window.URL || window.webkitURL;
 
 var gumStream;
@@ -217,15 +222,15 @@ function read_or_listen(_callback){
   const options = {
     once: true
   }
-  if(read_or_speak==0) {
-    document.querySelector('#chat-message-mic').addEventListener('click', () => {
-      listen(_callback);
-    }, options);
-  } else {
+  // if(read_or_speak==0) {
+  //   document.querySelector('#chat-message-mic').addEventListener('click', () => {
+  //     listen(_callback);
+  //   }, options);
+  // } else {
      document.querySelector('#chat-message-start').addEventListener('click', () => {
        read(_callback);
      }, options);
-  }
+  // }
 }
 
 
@@ -272,9 +277,9 @@ function buttonListener() {
 function speech(){
   $("#chat-message-volume").hide();
   $("#chat-message-volume2").hide();
-  $("#chat-message-start").hide();
+  $("#chat-message-start").show();
   $("#typefield").hide();
-  $("#chat-message-mic").show();
+  $("#chat-message-mic").hide();
   speakVoice(text);
   read_or_speak=0;
   beginning();
@@ -306,7 +311,7 @@ async function blinker(){
 }
 
 
-// convert text (phoneme?) to certain face bot
+// convert phoneme to certain face bot
 function resolveCharacter(message, index) {
   const character = String(message).toLowerCase()[index]
   const previousDouble = String(message).toLowerCase().substr(index - 1, index + 1)
@@ -444,7 +449,7 @@ function finalFeedback(result){
 }
 
 function finalFeedback2(){
-  text= "Now something more lightweight to talk about! If you don't want to, just say goodbye computer. But can I ask you first, do you feel a little bit better now after our conversation?";
+  text= "Now something more lightweight to talk about! If you don't want to, just say goodbye computer. But can I ask you first, what did you think of our conversation, do you feel better?";
   save_text=1;
   addLeo();
   speakVoice(text);
@@ -454,13 +459,12 @@ function finalFeedback2(){
 // casual chat part 1
 function casual1(speech2){
   bare_sentence = speech2[0];
+  console.log(bare_sentence);
   if (bare_sentence.includes('question')){
     both2(speech2);
   }
-  else if (bare_sentence != 'goodbye computer'){
-    createsentence(casual2);
-  }
-  else{
+
+  else if(bare_sentence.includes('goodbye computer') || bare_sentence.includes('Goodbye computer')){
     // send name and text and exit
     emotionList = [['self-esteem', value_dict['selfesteem'],selfesteem_dict],
     ['well-being', value_dict['wellbeing'],wellbeing_dict],
@@ -487,6 +491,10 @@ function casual1(speech2){
   		}
   	}).done(function(data) {
   	});
+    exit("bye");
+  }
+  else {
+    createsentence(casual2);
   }
 }
 
@@ -495,9 +503,12 @@ function exit(result){
   $("#chat-message-start").hide();
   $("#typefield").hide();
   $("#chat-message-volume").hide();
-  text = "It was nice talking to you, "+name+"! Hope to see you soon again. &#128522;";
-  addLeo();
-  speakVoice(text)
+  // text = "It was nice talking to you, "+name+"! Hope to see you soon again. &#128522;";
+  // addLeo();
+  // speakVoice(text)
+  setTimeout(function () {
+       window.location.href = "index5"; //will redirect to your blog page (an ex: blog.html)
+    }, 1000);
 }
 
 // casual chat part 2

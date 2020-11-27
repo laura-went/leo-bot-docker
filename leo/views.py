@@ -35,7 +35,23 @@ r = sr.Recognizer()
 @csrf_exempt
 def index(request):
     # return HttpResponse("Hello, world. You're at the polls index.")
-    return render(request, 'leo/index.html', {})
+    return render(request, 'leo/index2.html', {})
+
+@csrf_exempt
+def index3(request):
+    # return HttpResponse("Hello, world. You're at the polls index.")
+    return render(request, 'leo/index3.html', {})
+
+@csrf_exempt
+def index4(request):
+    # return HttpResponse("Hello, world. You're at the polls index.")
+    return render(request, 'leo/index4.html', {})
+
+@csrf_exempt
+def index5(request):
+    # return HttpResponse("Hello, world. You're at the polls index.")
+    return render(request, 'leo/index5.html', {})
+
 
 @csrf_exempt
 #create responding chatbot sentence

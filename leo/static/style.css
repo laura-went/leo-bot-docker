@@ -8,7 +8,7 @@ html {
 
 /* blue color #36c6ff */
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
@@ -24,53 +24,47 @@ body::-webkit-scrollbar-track {
 
 chat::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0);
-}
+} */
 
 body {
   font-family: "Montserrat";
-  margin: auto;
-  /* text-align: center; */
+  /* margin: auto;
   background-size: 100% 100%;
-  background-repeat: no;
+  background-repeat: no; */
 }
 
 .emoji {
-  height: 800%;
+  margin-bottom: 10px;
+  height: 14rem;
   display: inline-block;
 }
 
-h1 {
-  margin: 0px;
-  height: 30px;
-  display: inline-block;
-}
-
-.head {
+/* .head {
   margin: 5vw 5vw 3vw 15%;
   vertical-align: bottom;
   width: 20vw;
   display: inline-block;
-}
+} */
 
-.subtext {
+/* .subtext {
   font-family: 'Quantico', sans-serif;
-}
+} */
 
-.facebox {
+/* .facebox {
   margin-top: 10px;
   height: 30%;
   margin-bottom: 2vw;
-}
+} */
 
-#title {
+/* #title {
   text-shadow: 2px 2px #524978;
   margin-top: 5px;
   font-size: 50px;
   font-family: 'Press Start 2P', cursive;
   color: #625694;
-}
+} */
 
-.left {
+/* .left {
   display: inline-block;
   width: 65%;
   background-color: #36c6ff;
@@ -78,15 +72,15 @@ h1 {
   top: 0;
   bottom: 0;
   position: absolute;
-}
+} */
 
-.empty {
+/* .empty {
   margin-top: 10px;
   height: 30%;
   margin-bottom: 2vw;
-}
+} */
 
-.right {
+/* .right {
   display: inline-block;
   background-color: #db516a;
   width: 35%;
@@ -95,12 +89,12 @@ h1 {
   left: 65%;
   bottom: 0;
   position: absolute;
-}
+} */
 
 .chat {
   font-family: 'Quantico', sans-serif;
   margin: auto;
-  height: 400px;
+  height: 350px;
   border: solid 1px #EEE;
   display: flex;
   flex-direction: column;
@@ -108,11 +102,12 @@ h1 {
   overflow: auto;
   background-color: white;
   box-sizing: border-box;
+  font
 }
 
-.firstbox {
+/* .firstbox {
   background-color: #78d9ff;
-}
+} */
 
 #chat-message-volume {
   color: #363636;
@@ -123,6 +118,13 @@ h1 {
   color: #363636;
   font-weight: bold;
 }
+
+/* .prepare {
+  float: left;
+  width: 70%;
+  margin-left: 15%;
+  margin-bottom: 3vw;
+} */
 
 #newchat {
   float: left;
@@ -156,6 +158,7 @@ h1 {
   margin-bottom: 2px;
   display: inline-block;
   text-align: left;
+  color: black;
 }
 
 .leo {
@@ -173,7 +176,6 @@ h1 {
 }
 
 .mine .message {
-  color: white;
   margin-left: 25%;
   background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
   background-attachment: fixed;
@@ -227,7 +229,7 @@ h1 {
   vertical-align: super;
 }
 
-#chat-message-volume {
+#chat-message-volume2 {
   margin-left: 15%;
 }
 
@@ -245,19 +247,19 @@ h1 {
 }
 
 @media only screen and (max-width: 1000px) {
-  .head {
+  /* .head {
     display: block;
   }
   .facebox {
     display: block;
-  }
-  .emoji {
+  } */
+  /* .emoji {
     margin-left: 50%;
     height: 600%;
-  }
-  .subhead {
+  } */
+  /* .subhead {
     display: block;
-  }
+  } */
   .chat {
     display: block;
   }
@@ -278,7 +280,7 @@ h1 {
   #chat-message-volume2 {
     margin-left: 15%;
   } */
-  .left {
+  /* .left {
     display: block;
     width: 100%;
     position: relative;
@@ -293,7 +295,7 @@ h1 {
     top: auto;
     bottom: inherit;
     left: inherit;
-  }
+  } */
   #chat-log {
     margin-bottom: 2vw;
     float: unset;
