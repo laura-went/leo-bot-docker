@@ -11,4 +11,5 @@ urlpatterns = [
     path('index3', include('leo.urls')),
     path('index4', include('leo.urls')),
     path('index5', include('leo.urls')),
+    # url(r'^(\d+)/(\d+)$',views.add_to_db, name = 'add_to_db'),
 ]

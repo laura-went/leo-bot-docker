@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Jekyll v4.1.1">
-  <title>Carousel Template · Bootstrap</title>
+  <title>Leo</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
 
@@ -74,26 +74,26 @@
           <!-- Questionaire -->
           <div class="card-deck mb-3 text-center">
             <div class="card mb-4 shadow-sm">
-              <form action="{% url 'index4' %}" method="post">
+              <form action="{% url 'add_to_db' %} " method="post">
                 <!-- Question starts here -->
-                <p class="text-center">On the scale how much was it easy to interact with our chatbot?</p>
-                <div class="card-body">
-                  <div class="container grid-striped">
-                    <div class="row" style="height:50px;">
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_1" value="1" required>  1 (Never Satisfied)</span>
+                <p class="text-center ">On the scale how much was it easy to interact with our chatbot?</p>
+                <div class="card-body ">
+                  <div class="container grid-striped ">
+                    <div class="row " style="height:50px; ">
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_1" value="1" required>  1 (Never Satisfied)</span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_1" value="2">  2 </span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_1" value="2">  2 </span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_1" value="3">  3 </span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_1" value="3">  3 </span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_1" value="4">  4 </span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_1" value="4">  4 </span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_1" value="5">  5 (Very Satisfied)</span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_1" value="5">  5 (Very Satisfied)</span>
                       </div>
                     </div>
                   </div>
@@ -101,49 +101,24 @@
                 <hr>
                 <!-- Question ends here -->
                 <!-- Question starts here -->
-                <p class="text-center">How much you liked interacting with the bot?</p>
-                <div class="card-body">
-                  <div class="container grid-striped">
-                    <div class="row" style="height:50px;">
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_2" value="1" required>  1 (Never Satisfied)</span>
+                <p class="text-center ">How much you liked interacting with the bot?</p>
+                <div class="card-body ">
+                  <div class="container grid-striped ">
+                    <div class="row " style="height:50px; ">
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_2" value="1" required>  1 (Never Satisfied)</span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_2" value="2">  2 </span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_2" value="2">  2 </span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_2" value="3">  3 </span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_2" value="3">  3 </span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_2" value="4">  4 </span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_2" value="4">  4 </span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_2" value="5">  5 (Very Satisfied)</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr>
-                <!-- Question ends here -->
-                <!-- Question starts here -->
-                <p class="text-center">How much you feel happy and satisfied talking to the chatbot?</p>
-                <div class="card-body">
-                  <div class="container grid-striped">
-                    <div class="row" style="height:50px;">
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_3" value="1" required>  1 (Never Satisfied)</span>
-                      </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_3" value="2">  2 </span>
-                      </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_3" value="3">  3 </span>
-                      </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_3" value="4">  4 </span>
-                      </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_3" value="5">  5 (Very Satisfied)</span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_2" value="5">  5 (Very Satisfied)</span>
                       </div>
                     </div>
                   </div>
@@ -151,49 +126,24 @@
                 <hr>
                 <!-- Question ends here -->
                 <!-- Question starts here -->
-                <p class="text-center">Would you like to use such a chatbot as your companion in future?</p>
-                <div class="card-body">
-                  <div class="container grid-striped">
-                    <div class="row" style="height:50px;">
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_4" value="1" required>  1 (Never Satisfied)</span>
+                <p class="text-center ">How much you feel happy and satisfied talking to the chatbot?</p>
+                <div class="card-body ">
+                  <div class="container grid-striped ">
+                    <div class="row " style="height:50px; ">
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_3" value="1" required>  1 (Never Satisfied)</span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_4" value="2">  2 </span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_3" value="2">  2 </span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_4" value="3">  3 </span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_3" value="3">  3 </span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_4" value="4">  4 </span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_3" value="4">  4 </span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_4" value="5">  5 (Very Satisfied)</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr>
-                <!-- Question ends here -->
-                <!-- Question starts here -->
-                <p class="text-center">How much using the chatbot displeased you?</p>
-                <div class="card-body">
-                  <div class="container grid-striped">
-                    <div class="row" style="height:50px;">
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_5" value="1" required>  1 (Never Satisfied)</span>
-                      </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_5" value="2">  2 </span>
-                      </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_5" value="3">  3 </span>
-                      </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_5" value="4">  4 </span>
-                      </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_5" value="5">  5 (Very Satisfied)</span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_3" value="5">  5 (Very Satisfied)</span>
                       </div>
                     </div>
                   </div>
@@ -201,49 +151,24 @@
                 <hr>
                 <!-- Question ends here -->
                 <!-- Question starts here -->
-                <p class="text-center">Do you think chatbot comforted/motivated you?</p>
-                <div class="card-body">
-                  <div class="container grid-striped">
-                    <div class="row" style="height:50px;">
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_6" value="1" required>  1 (Never Satisfied)</span>
+                <p class="text-center ">Would you like to use such a chatbot as your companion in future?</p>
+                <div class="card-body ">
+                  <div class="container grid-striped ">
+                    <div class="row " style="height:50px; ">
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_4" value="1" required>  1 (Never Satisfied)</span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_6" value="2">  2 </span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_4" value="2">  2 </span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_6" value="3">  3 </span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_4" value="3">  3 </span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_6" value="4">  4 </span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_4" value="4">  4 </span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_6" value="5">  5 (Very Satisfied)</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr>
-                <!-- Question ends here -->
-                <!-- Question starts here -->
-                <p class="text-center">Do you prefer the textual chatbot over the audio chatbot?</p>
-                <div class="card-body">
-                  <div class="container grid-striped">
-                    <div class="row" style="height:50px;">
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_7" value="1" required>  1 (Never Satisfied)</span>
-                      </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_7" value="2">  2 </span>
-                      </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_7" value="3">  3 </span>
-                      </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_7" value="4">  4 </span>
-                      </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_7" value="5">  5 (Very Satisfied)</span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_4" value="5">  5 (Very Satisfied)</span>
                       </div>
                     </div>
                   </div>
@@ -251,24 +176,99 @@
                 <hr>
                 <!-- Question ends here -->
                 <!-- Question starts here -->
-                <p class="text-center">Do you find trouble controlling your anger?</p>
-                <div class="card-body">
-                  <div class="container grid-striped">
-                    <div class="row" style="height:50px;">
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_8" value="1" required>  1 (Never Satisfied)</span>
+                <p class="text-center ">How much using the chatbot displeased you?</p>
+                <div class="card-body ">
+                  <div class="container grid-striped ">
+                    <div class="row " style="height:50px; ">
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_5" value="1" required>  1 (Never Satisfied)</span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_8" value="2">  2 </span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_5" value="2">  2 </span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_8" value="3">  3 </span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_5" value="3">  3 </span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_8" value="4">  4 </span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_5" value="4">  4 </span>
                       </div>
-                      <div class="col-sm d-flex my-auto">
-                        <span class="ml-2 align-middle"><input type="radio" name="question_8" value="5">  5 (Very Satisfied)</span>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_5" value="5">  5 (Very Satisfied)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <!-- Question ends here -->
+                <!-- Question starts here -->
+                <p class="text-center ">Do you think chatbot comforted/motivated you?</p>
+                <div class="card-body ">
+                  <div class="container grid-striped ">
+                    <div class="row " style="height:50px; ">
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_6" value="1" required>  1 (Never Satisfied)</span>
+                      </div>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_6" value="2">  2 </span>
+                      </div>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_6" value="3">  3 </span>
+                      </div>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_6" value="4">  4 </span>
+                      </div>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_6" value="5">  5 (Very Satisfied)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <!-- Question ends here -->
+                <!-- Question starts here -->
+                <p class="text-center ">Do you prefer the textual chatbot over the audio chatbot?</p>
+                <div class="card-body ">
+                  <div class="container grid-striped ">
+                    <div class="row " style="height:50px; ">
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_7" value="1" required>  1 (Never Satisfied)</span>
+                      </div>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_7" value="2">  2 </span>
+                      </div>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_7" value="3">  3 </span>
+                      </div>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_7" value="4">  4 </span>
+                      </div>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_7" value="5">  5 (Very Satisfied)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <!-- Question ends here -->
+                <!-- Question starts here -->
+                <p class="text-center ">Do you find trouble controlling your anger?</p>
+                <div class="card-body ">
+                  <div class="container grid-striped ">
+                    <div class="row " style="height:50px; ">
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_8" value="1" required>  1 (Never Satisfied)</span>
+                      </div>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_8" value="2">  2 </span>
+                      </div>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_8" value="3">  3 </span>
+                      </div>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_8" value="4">  4 </span>
+                      </div>
+                      <div class="col-sm d-flex my-auto ">
+                        <span class="ml-2 align-middle "><input type="radio" name="question_8" value="5">  5 (Very Satisfied)</span>
                       </div>
                     </div>
                   </div>
@@ -276,25 +276,27 @@
                 <hr>
                 <!-- Question ends here -->
                 <br>
-                <button type="submit" class="btn btn-lg btn-block btn-primary">Proceed</button>
+                <button type="submit " class="btn btn-lg btn-block btn-primary ">Finish</button>
               </form>
               <!-- End Questionaire -->
             </div>
           </div>
           <!-- /.row -->
-          <hr class="featurette-divider">
+          <hr class="featurette-divider ">
         </div>
-        <!-- /.container -->
+      </div>
+    </div>
+    <!-- /.container -->
 
 
-        <!-- FOOTER -->
-        <footer class="container">
-          <p class="float-right"><a href="#">Back to top</a></p>
-          <p>&copy; 2020 Vrije Universiteit Amsterdam &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-        </footer>
+    <!-- FOOTER -->
+    <footer class="container ">
+      <p class="float-right "><a href="# ">Back to top</a></p>
+      <p>&copy; 2020 Vrije Universiteit Amsterdam &middot; <a href="# ">Privacy</a> &middot; <a href="# ">Terms</a></p>
+    </footer>
   </main>
-  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
 
 </html>

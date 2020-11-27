@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.views.decorators.csrf import csrf_exempt
 import sys
 
@@ -31,6 +31,13 @@ context = ContextRecognition()
 context.load_corpus("corpus/")
 context.load_model()
 r = sr.Recognizer()
+
+before1=[]
+after1= []
+name1 = ''
+text1 = ''
+emotions1 = ''
+
 
 @csrf_exempt
 def index(request):
@@ -101,13 +108,42 @@ def get_blob_text(request):
 
 @csrf_exempt
 def add_to_db(request):
-    name1 = request.POST.get('name', False)
-    text1 = request.POST.get('text', False)
-    emotions1 = request.POST.get('emotions', False)
-    user = User(name=name1, text=text1, emotions=emotions1)
-    user.save()
-    json_stuff = json.dumps({name1: [text1,emotions1]})
-    return HttpResponse(json_stuff, content_type="application/json")
+    global before1, after1, name1, text1, emotions1
+    json_stuff= json.dumps({'start':'start db'})
+    if request.POST.get('q_1','')!='':
+        q1b = request.POST.get('q_1','')
+        q2b = request.POST.get('q_2','')
+        q3b = request.POST.get('q_3','')
+        q4b = request.POST.get('q_4','')
+        q5b = request.POST.get('q_5','')
+        q6b = request.POST.get('q_6','')
+        q7b = request.POST.get('q_7','')
+        q8b = request.POST.get('q_8','')
+        before1 = [q1b,q2b,q3b,q4b,q5b,q6b,q7b,q8b]
+        return redirect("/index4")
+    if request.POST.get('name', False)!=False:
+        name1 = request.POST.get('name', False)
+        text1 = request.POST.get('text', False)
+        emotions1 = request.POST.get('emotions', False)
+        return redirect("/index5")
+    if request.POST.get('question_1','')!='':
+        q1a = request.POST.get('question_1','')
+        q2a = request.POST.get('question_2','')
+        q3a = request.POST.get('question_3','')
+        q4a = request.POST.get('question_4','')
+        q5a = request.POST.get('question_5','')
+        q6a = request.POST.get('question_6','')
+        q7a = request.POST.get('question_7','')
+        q8a = request.POST.get('question_8','')
+        after1 = [q1a,q2a,q3a,q4a,q5a,q6a,q7a,q8a]
+        user = User(name=name1, text=text1, emotions=emotions1, before=before1, after=after1)
+        user.save()
+        json_stuff = json.dumps({name1: [text1,emotions1]})
+        return redirect("/#")
+    return HttpResponse("nope...")
+
+
+    # return HttpResponse(status=204)
 
 
 
