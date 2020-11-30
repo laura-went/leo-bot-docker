@@ -115,8 +115,8 @@ body {
 }
 
 #chat-message-volume2 {
-  color: #363636;
-  font-weight: bold;
+  color: white;
+  /* font-weight: bold; */
 }
 
 /* .prepare {
@@ -213,7 +213,7 @@ body {
 .button {
   display: inline-block;
   margin: 10px 0px 10px;
-  background-color: #db516a;
+  background-color: rgb(119, 119, 119);
   border: none;
   color: white;
   font-weight: bold;
@@ -227,6 +227,7 @@ body {
   width: 100px;
   height: 50px;
   vertical-align: super;
+  font
 }
 
 #chat-message-volume2 {
@@ -243,7 +244,7 @@ body {
 }
 
 .button:hover {
-  background-color: #c4475d;
+  background-color: rgb(107, 107, 107);
 }
 
 @media only screen and (max-width: 1000px) {

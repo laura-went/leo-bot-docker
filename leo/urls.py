@@ -13,5 +13,6 @@ urlpatterns = [
     path('index3', views.index3, name='index3'),
     path('index4', views.index4, name='index4'),
     path('index5', views.index5, name='index5'),
-    
+    path('privacy', views.privacy, name='privacy'),
+    path('index2', views.index, name='index2'),
 ]

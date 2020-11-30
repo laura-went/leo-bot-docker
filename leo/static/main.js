@@ -228,6 +228,7 @@ function read_or_listen(_callback){
   //   }, options);
   // } else {
      document.querySelector('#chat-message-start').addEventListener('click', () => {
+       console.log('read_or_listen')
        read(_callback);
      }, options);
   // }
@@ -260,7 +261,7 @@ function both(result){
 	name = result[0];
   console.log(name);
 	emotion = result[1]['list'];
-  text = "So " + name + ", would you like to chat about how to make the world better for you?"
+  text = "So " + name + ", do you want to chat about how you are feeling?"
   addLeo();
   speakVoice(text);
   console.log(read_or_speak);
@@ -561,10 +562,10 @@ function bully4(result){
 	value_dict['bully'] = value/bully_value;
   value=0;
   console.log('bully chat-log')
-  document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append("\n"+'bully '+ value_dict['bully'].toFixed(2) +':\n' + bully_dict);
-  document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
+  // document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").append("\n"+'bully '+ value_dict['bully'].toFixed(2) +':\n' + bully_dict);
+  // document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
   finalFeedback();
 }
@@ -662,10 +663,10 @@ function victim4(result){
 	value_dict['victim'] = value/victim_value;
   value=0;
   console.log('victim chat-log')
-  document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append("\n"+'victim '+ value_dict['victim'].toFixed(2) +':\n' + victim_dict);
-  document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
+  // document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").append("\n"+'victim '+ value_dict['victim'].toFixed(2) +':\n' + victim_dict);
+  // document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
   finalFeedback();
 }
@@ -763,10 +764,10 @@ function sensitivity4(result){
 	value_dict['sensitivity'] = value/sensitivity_value;
   value=0;
   console.log('sensitivity chat-log')
-  document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append("\n"+'sensitivity '+ value_dict['sensitivity'].toFixed(2) +':\n' + sensitivity_dict);
-  document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
+  // document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").append("\n"+'sensitivity '+ value_dict['sensitivity'].toFixed(2) +':\n' + sensitivity_dict);
+  // document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
 	if (value_dict['sensitivity'] >= 0.5){
     addLeo();
@@ -871,10 +872,10 @@ function anger4(result){
 	value_dict['anger'] = value/anger_value;
   value=0;
   console.log('anger chat-log')
-  document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append("\n"+'anger '+ value_dict['anger'].toFixed(2) +':\n' + anger_dict);
-  document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
+  // document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").append("\n"+'anger '+ value_dict['anger'].toFixed(2) +':\n' + anger_dict);
+  // document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
 	if (value_dict['anger'] >= 0.5){
     addLeo();
@@ -980,10 +981,10 @@ function wellbeing4(result){
 	value_dict['wellbeing'] = value/wellbeing_value;
   value=0;
   console.log('wellbeing chat-log')
-  document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append("\n"+'wellbeing '+ value_dict['wellbeing'].toFixed(2) +':\n' + wellbeing_dict);
-  document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
+  // document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").append("\n"+'wellbeing '+ value_dict['wellbeing'].toFixed(2) +':\n' + wellbeing_dict);
+  // document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
 	if (value_dict['wellbeing'] >= 0.5){
 		anger1();
@@ -1087,10 +1088,10 @@ function mood4(result){
 	value_dict['mood'] = value/mood_value;
   value=0;
   console.log('mood chat-log')
-  document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append('mood '+ value_dict['mood'].toFixed(2) +':\n' + mood_dict);
-  document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
+  // document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").append('mood '+ value_dict['mood'].toFixed(2) +':\n' + mood_dict);
+  // document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
 	if (value_dict['mood'] >= 0.5){
 		wellbeing1();
@@ -1193,9 +1194,9 @@ function interactions4(result){
 	value_dict['interactions'] = value/interactions_value;
   value=0;
   console.log('interactions chat-log')
-  document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append("\n"+'interactions '+ value_dict['interactions'].toFixed(2) +':\n' + interactions_dict);
-  document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").append("\n"+'interactions '+ value_dict['interactions'].toFixed(2) +':\n' + interactions_dict);
+  // document.getElementById("chat-log").appendChild(br);
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
 	if (value_dict['interactions'] >= 0.5){
 		wellbeing1();
@@ -1288,7 +1289,7 @@ function selfesteem4(result){
 	aggression = emotion[2];
   if (!speech.includes('no') || negative.includes(voice_emotion)){
 		value += response_value;
-    response = random(supportive);
+    response = random(supportive) + '\nBy the way, my favorite flower is the Sunflower!';
   	var index = supportive.indexOf(response);
   	supportive.splice(index, 1);
     addLeo();
@@ -1298,9 +1299,9 @@ function selfesteem4(result){
 	value_dict['selfesteem'] = value/selfesteem_value;
   value=0;
   console.log('selfesteem chat-log')
-  document.getElementById("chat-log").appendChild(br);
-  document.getElementById("chat-log").append('selfesteem '+ value_dict['selfesteem'].toFixed(2) +':\n' + selfesteem_dict);
-  document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").appendChild(br);
+  // document.getElementById("chat-log").append('selfesteem '+ value_dict['selfesteem'].toFixed(2) +':\n' + selfesteem_dict);
+  // document.getElementById("chat-log").appendChild(br);
   document.getElementById("newchat").scrollTop = document.getElementById("newchat").scrollHeight;
 	if (value_dict['selfesteem'] >= 0.5){
 		interactions1();
@@ -1624,7 +1625,7 @@ function listen2(callback){
 
 function read(callback){
   var text2 = document.getElementById("typefield").value;
-
+  console.log('read1')
   addMe(text2);
   speech = text2;
   document.getElementById(messageCounter).innerHTML = text2
@@ -1634,6 +1635,7 @@ function read(callback){
   var fd = new FormData();
   fd.append('text', text2);
   document.getElementById("typefield").value ="";
+  console.log('read2')
   $.ajax({
     type: 'POST',
     url: "text",

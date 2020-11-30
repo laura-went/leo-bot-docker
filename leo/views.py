@@ -59,6 +59,11 @@ def index5(request):
     # return HttpResponse("Hello, world. You're at the polls index.")
     return render(request, 'leo/index5.html', {})
 
+@csrf_exempt
+def privacy(request):
+    # return HttpResponse("Hello, world. You're at the polls index.")
+    return render(request, 'leo/privacy.html', {})
+
 
 @csrf_exempt
 #create responding chatbot sentence
@@ -119,14 +124,15 @@ def add_to_db(request):
         q6b = request.POST.get('q_6','')
         q7b = request.POST.get('q_7','')
         q8b = request.POST.get('q_8','')
-        before1 = [q1b,q2b,q3b,q4b,q5b,q6b,q7b,q8b]
+        q9b = request.POST.get('q_9','')
+        before1 = [q1b,q2b,q3b,q4b,q5b,q6b,q7b,q8b,q9b]
         return redirect("/index4")
     if request.POST.get('name', False)!=False:
         name1 = request.POST.get('name', False)
         text1 = request.POST.get('text', False)
         emotions1 = request.POST.get('emotions', False)
         return redirect("/index5")
-    if request.POST.get('question_1','')!='':
+    if request.POST.get('question_9','')=="1":
         q1a = request.POST.get('question_1','')
         q2a = request.POST.get('question_2','')
         q3a = request.POST.get('question_3','')
@@ -135,12 +141,13 @@ def add_to_db(request):
         q6a = request.POST.get('question_6','')
         q7a = request.POST.get('question_7','')
         q8a = request.POST.get('question_8','')
-        after1 = [q1a,q2a,q3a,q4a,q5a,q6a,q7a,q8a]
+        q10a = request.POST.get('question_10','')
+        after1 = [q1a,q2a,q3a,q4a,q5a,q6a,q7a,q8a,q10a]
         user = User(name=name1, text=text1, emotions=emotions1, before=before1, after=after1)
         user.save()
         json_stuff = json.dumps({name1: [text1,emotions1]})
         return redirect("/#")
-    return HttpResponse("nope...")
+    return redirect("/#")
 
 
     # return HttpResponse(status=204)

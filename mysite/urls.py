@@ -8,8 +8,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^favicon\.ico$',RedirectView.as_view(url='/static/favicon/favicon.ico')),
     path('', include('leo.urls')),
+    path('index2', include('leo.urls')),
     path('index3', include('leo.urls')),
     path('index4', include('leo.urls')),
     path('index5', include('leo.urls')),
+    path('privacy', include('leo.urls')),
     # url(r'^(\d+)/(\d+)$',views.add_to_db, name = 'add_to_db'),
 ]
