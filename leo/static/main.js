@@ -229,7 +229,14 @@ function read_or_listen(_callback){
   // } else {
      document.querySelector('#chat-message-start').addEventListener('click', () => {
        console.log('read_or_listen')
-       read(_callback);
+       var text3 = document.getElementById("typefield").value;
+       if(text3.includes('bye') || text3.includes('Bye')){
+         // send name and text and exit
+         bye();
+       }
+       else {
+         read(_callback);
+       }
      }, options);
   // }
 }
@@ -249,7 +256,7 @@ function both2(result){
 	}
 	else {
     addLeo();
-		speakVoice("Ok, we can chat for a bit as well. \nJust say 'goodbye computer' " +
+		speakVoice("Ok, we can chat for a bit as well. \nJust say 'bye' " +
     "if you're done. \nOr include the word 'question' in your sentence if you'd " +
     "still like to talk about personal stuff.\nNow tell me "+name+", what would you like to talk about?");
     read_or_listen(casual1);
@@ -450,7 +457,7 @@ function finalFeedback(result){
 }
 
 function finalFeedback2(){
-  text= "Now something more lightweight to talk about! If you don't want to, just say goodbye computer. But can I ask you first, what did you think of our conversation, do you feel better?";
+  text= "Now something more lightweight to talk about! If you don't want to, just say 'bye'. But can I ask you first, what did you think of our conversation, do you feel better?";
   save_text=1;
   addLeo();
   speakVoice(text);
@@ -465,39 +472,46 @@ function casual1(speech2){
     both2(speech2);
   }
 
-  else if(bare_sentence.includes('goodbye computer') || bare_sentence.includes('Goodbye computer')){
+  else if(bare_sentence.includes('bye') || bare_sentence.includes('Bye')){
     // send name and text and exit
-    emotionList = [['self-esteem', value_dict['selfesteem'],selfesteem_dict],
-    ['well-being', value_dict['wellbeing'],wellbeing_dict],
-    ['interactions', value_dict['interactions'],interactions_dict],
-    ['mood', value_dict['mood'],mood_dict],
-    ['sensitivity', value_dict['sensitivity'],sensitivity_dict],
-    ['bullying', value_dict['bully'],bully_dict],
-    ['anger', value_dict['anger'],anger_dict],
-    ['bullied', value_dict['victim'],victim_dict]];
-    var url = "add_to_db";
-  	var fd = new FormData();
-    fd.append('name', name)
-  	fd.append('text', total_text);
-    fd.append('emotions', emotionList);
-  	$.ajax({
-  		type: 'POST',
-  		url: url,
-  		data: fd,
-  		processData: false,
-  		contentType: false,
-  		success: function(response) {
-        console.log(response)
-  			exit(response);
-  		}
-  	}).done(function(data) {
-  	});
-    exit("bye");
+    bye();
   }
   else {
     createsentence(casual2);
   }
 }
+
+function bye(){
+  console.log("IMPORTANT")
+  emotionList = [['self-esteem', value_dict['selfesteem'],selfesteem_dict],
+  ['well-being', value_dict['wellbeing'],wellbeing_dict],
+  ['interactions', value_dict['interactions'],interactions_dict],
+  ['mood', value_dict['mood'],mood_dict],
+  ['sensitivity', value_dict['sensitivity'],sensitivity_dict],
+  ['bullying', value_dict['bully'],bully_dict],
+  ['anger', value_dict['anger'],anger_dict],
+  ['bullied', value_dict['victim'],victim_dict]];
+  var url = "add_to_db";
+  var fd = new FormData();
+  fd.append('name', name)
+  fd.append('text', total_text);
+  fd.append('emotions', emotionList);
+  $.ajax({
+    type: 'POST',
+    url: url,
+    data: fd,
+    processData: false,
+    contentType: false,
+    success: function(response) {
+      console.log('##############RESPONSE: ',response)
+      exit(response);
+    }
+  }).done(function(data) {
+    console.log('IMPORTANT2222222222')
+  });
+  exit("bye");
+}
+
 
 function exit(result){
   $("#chat-message-mic").hide();
@@ -509,7 +523,7 @@ function exit(result){
   // speakVoice(text)
   setTimeout(function () {
        window.location.href = "index5"; //will redirect to your blog page (an ex: blog.html)
-    }, 1000);
+    }, 10000);
 }
 
 // casual chat part 2

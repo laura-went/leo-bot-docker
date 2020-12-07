@@ -125,7 +125,8 @@ def add_to_db(request):
         q7b = request.POST.get('q_7','')
         q8b = request.POST.get('q_8','')
         q9b = request.POST.get('q_9','')
-        before1 = [q1b,q2b,q3b,q4b,q5b,q6b,q7b,q8b,q9b]
+        q10b = request.POST.get('q_10','')
+        before1 = [q1b,q2b,q3b,q4b,q5b,q6b,q7b,q8b,q9b,q10b]
         return redirect("/index4")
     if request.POST.get('name', False)!=False:
         name1 = request.POST.get('name', False)
@@ -142,7 +143,14 @@ def add_to_db(request):
         q7a = request.POST.get('question_7','')
         q8a = request.POST.get('question_8','')
         q10a = request.POST.get('question_10','')
-        after1 = [q1a,q2a,q3a,q4a,q5a,q6a,q7a,q8a,q10a]
+        q11a = request.POST.get('question_11','')
+        q12a = request.POST.get('question_12','')
+        q13a = request.POST.get('question_13','')
+        q14a = request.POST.get('question_14','')
+        q15a = request.POST.get('question_15','')
+        q16a = request.POST.get('question_16','')
+        q17a = request.POST.get('question_17','')
+        after1 = [q1a,q2a,q3a,q4a,q5a,q6a,q7a,q8a,q10a,q11a,q12a,q13a,q14a,q15a,q16a,q17a]
         user = User(name=name1, text=text1, emotions=emotions1, before=before1, after=after1)
         user.save()
         json_stuff = json.dumps({name1: [text1,emotions1]})
