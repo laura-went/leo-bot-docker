@@ -524,7 +524,7 @@ function exit(result){
   // speakVoice(text)
   setTimeout(function () {
        window.location.href = "index5"; //will redirect to your blog page (an ex: blog.html)
-    }, 10000);
+    }, 1000);
 }
 
 // casual chat part 2
@@ -1668,7 +1668,7 @@ function read(callback){
         total_text+=text2 + ';';
         save_text=0;
       }
-      setTimeout(function() {callback([text2, response]);},2300);
+      setTimeout(function() {callback([text2, response]);},2000);
 
     }
   }).done(function(data) {
