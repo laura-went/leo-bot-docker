@@ -116,6 +116,7 @@ def add_to_db(request):
     global before1, after1, name1, text1, emotions1
     json_stuff= json.dumps({'start':'start db'})
     if request.POST.get('q_1','')!='':
+        p1 =request.POST.get('prolific', False)
         q1b = request.POST.get('q_1','')
         q2b = request.POST.get('q_2','')
         q3b = request.POST.get('q_3','')
@@ -129,7 +130,6 @@ def add_to_db(request):
         before1 = [q1b,q2b,q3b,q4b,q5b,q6b,q7b,q8b,q9b,q10b]
         return redirect("/index4")
     if request.POST.get('name', False)!=False:
-        p1 =request.POST.get('prolific', False)
         name1 = request.POST.get('name', False)
         text1 = request.POST.get('text', False)
         emotions1 = request.POST.get('emotions', False)
