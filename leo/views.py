@@ -129,7 +129,7 @@ def add_to_db(request):
         before1 = [q1b,q2b,q3b,q4b,q5b,q6b,q7b,q8b,q9b,q10b]
         return redirect("/index4")
     if request.POST.get('name', False)!=False:
-        name1 = request.POST.get('name', False)+"+"+request.POST.get('prolific', False)
+        name1 = request.POST.get('name', False)
         text1 = request.POST.get('text', False)
         emotions1 = request.POST.get('emotions', False)
         return redirect("/index5")
