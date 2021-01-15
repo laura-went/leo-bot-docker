@@ -129,7 +129,8 @@ def add_to_db(request):
         before1 = [q1b,q2b,q3b,q4b,q5b,q6b,q7b,q8b,q9b,q10b]
         return redirect("/index4")
     if request.POST.get('name', False)!=False:
-        name1 = request.POST.get('name', False)+"+"+request.POST.get('prolific', False)
+        p1 =request.POST.get('prolific', False)
+        name1 = request.POST.get('name', False)
         text1 = request.POST.get('text', False)
         emotions1 = request.POST.get('emotions', False)
         return redirect("/index5")
@@ -151,7 +152,7 @@ def add_to_db(request):
         q16a = request.POST.get('question_16','')
         q17a = request.POST.get('question_17','')
         after1 = [q1a,q2a,q3a,q4a,q5a,q6a,q7a,q8a,q10a,q11a,q12a,q13a,q14a,q15a,q16a,q17a]
-        user = User(name=name1, text=text1, emotions=emotions1, before=before1, after=after1)
+        user = User(name=name1, prolific=p1, text=text1, emotions=emotions1, before=before1, after=after1)
         user.save()
         json_stuff = json.dumps({name1: [text1,emotions1]})
         return redirect("/#")
