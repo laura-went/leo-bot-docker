@@ -77,6 +77,19 @@
             <div class="card mb-4 shadow-sm">
               <form action="{% url 'add_to_db' %}" method="post">
                 <!-- Question starts here -->
+                <p class="text-center">Please fill in your Prolific ID</p>
+                <div class="card-body">
+                  <div class="container grid-striped">
+                    <div class="row" style="height:50px;">
+                      <div class="col-sm d-flex my-auto">
+                        <span class="ml-2 align-middle"><input type="text" name="prolific" value="" required></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <!-- Question ends here -->
+                <!-- Question starts here -->
                 <p class="text-center">In the previous few weeks did you feel unhappy?</p>
                 <div class="card-body">
                   <div class="container grid-striped">
