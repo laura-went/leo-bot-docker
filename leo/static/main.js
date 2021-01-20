@@ -1670,7 +1670,10 @@ function read(callback){
       }
       setTimeout(function() {callback([text2, response]);},2000);
 
-    }
+    },
+    error: function(returnval) {
+            console.log(returnval);
+          }
   }).done(function(data) {
     console.log("yay2")
     emotion = data;
