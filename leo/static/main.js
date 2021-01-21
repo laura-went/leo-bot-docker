@@ -1672,7 +1672,7 @@ function read(callback){
 
     },
     error: function(returnval) {
-            console.log(returnval);
+            console.log("nope: ", returnval);
           }
   }).done(function(data) {
     console.log("yay2")

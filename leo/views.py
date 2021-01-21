@@ -116,7 +116,7 @@ def add_to_db(request):
     global before1, after1, name1, text1, emotions1
     json_stuff= json.dumps({'start':'start db'})
     if request.POST.get('q_1','')!='':
-        p1 =request.POST.get('prolific', False)
+        p1 =request.POST.get('prolific', '')
         q1b = request.POST.get('q_1','')
         q2b = request.POST.get('q_2','')
         q3b = request.POST.get('q_3','')
@@ -127,7 +127,7 @@ def add_to_db(request):
         q8b = request.POST.get('q_8','')
         q9b = request.POST.get('q_9','')
         q10b = request.POST.get('q_10','')
-        before1 = [q1b,q2b,q3b,q4b,q5b,q6b,q7b,q8b,q9b,q10b]
+        before1 = [p1,q1b,q2b,q3b,q4b,q5b,q6b,q7b,q8b,q9b,q10b]
         return redirect("/index4")
     if request.POST.get('name', False)!=False:
         name1 = request.POST.get('name', False)
@@ -152,7 +152,7 @@ def add_to_db(request):
         q16a = request.POST.get('question_16','')
         q17a = request.POST.get('question_17','')
         after1 = [q1a,q2a,q3a,q4a,q5a,q6a,q7a,q8a,q10a,q11a,q12a,q13a,q14a,q15a,q16a,q17a]
-        user = User(name=name1, prolific=p1, text=text1, emotions=emotions1, before=before1, after=after1)
+        user = User(name=name1, text=text1, emotions=emotions1, before=before1, after=after1)
         user.save()
         json_stuff = json.dumps({name1: [text1,emotions1]})
         return redirect("/#")
